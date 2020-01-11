@@ -2,6 +2,9 @@ const path = require('path');
 
 const bodyParser = require('body-parser');
 const express = require('express');
+
+const Post = require('./models/post-model');
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -14,8 +17,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get('/', (request, response) => {
+    const posts = Post.getAllPosts();
     response.render('index', {
-        testData: 'Working'
+        posts: posts
     });
 });
 
